@@ -31,6 +31,11 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
       const el = cardRef.current;
       if (!el) return;
 
+      const reducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) return;
+
       const onEnter = () => {
         gsap.to(el, { scale: 1.02, y: -4, duration: 0.35, ease: "power2.out" });
       };

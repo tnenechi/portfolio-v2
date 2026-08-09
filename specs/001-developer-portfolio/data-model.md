@@ -17,7 +17,6 @@ Represents the developer's core identity, bio, availability status, and global s
 | `name`      | `string`                                    | Yes      | Full developer name                                                 |
 | `headline`  | `string`                                    | Yes      | Primary professional title (e.g. "Senior Full-Stack & UI Engineer") |
 | `bio`       | `string`                                    | Yes      | Detailed introductory bio paragraph                                 |
-| `location`  | `string`                                    | Yes      | Location (e.g. "San Francisco, CA / Remote")                        |
 | `status`    | `'available' \| 'busy' \| 'open_to_offers'` | Yes      | Current availability badge state                                    |
 | `socials`   | `SocialLink[]`                              | Yes      | Array of social platform links                                      |
 | `resumeUrl` | `string`                                    | Yes      | Relative or absolute path to downloadable resume PDF                |

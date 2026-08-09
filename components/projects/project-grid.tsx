@@ -23,6 +23,15 @@ export function ProjectGrid() {
       const cards = gsap.utils.toArray<HTMLElement>('.project-card-item');
       if (!cards.length) return;
 
+      const reducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reducedMotion) {
+        gsap.set(cards, { opacity: 1, y: 0 });
+        return;
+      }
+
       gsap.from(cards, {
         opacity: 0,
         y: 36,

@@ -1,13 +1,16 @@
-import { Code2, Globe, X, Mail, GraduationCap, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
+import { VscGithub } from 'react-icons/vsc';
+import { BsLinkedin } from 'react-icons/bs';
+import { IoMailOutline } from 'react-icons/io5';
 import { profileData } from '@/lib/data/profile';
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  Code2,
-  Globe,
-  X,
-  Mail,
-  GraduationCap,
+  VscGithub,
+  BsLinkedin,
+  IoMailOutline,
 };
+
+const BRAND_NAME = `${profileData.name.split(' ')[0]}.dev`;
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -18,7 +21,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start gap-1">
-            <span className="text-sm font-bold gradient-text">Alex.dev</span>
+            <span className="text-sm font-bold gradient-text">{BRAND_NAME}</span>
             <p className="text-xs text-muted-foreground">
               {profileData.headline}
             </p>

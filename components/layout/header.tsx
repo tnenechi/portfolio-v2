@@ -1,31 +1,39 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { Menu, X, Download, Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
+import { profileData } from '@/lib/data/profile';
 
 const NAV_LINKS = [
   { label: 'Work', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
 
+const BRAND_NAME = `${profileData.name.split(' ')[0]}.dev`;
+
+// Reports `false` on the server and during the first client render, then
+// `true` from the next render onward — the React-team-recommended way to
+// gate hydration-sensitive UI (like a theme icon) without the cascading
+// setState-in-effect pattern.
+const subscribeNever = () => () => {};
+function useMounted() {
+  return useSyncExternalStore(subscribeNever, () => true, () => false);
+}
+
 export function Header() {
   const { resolvedTheme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
-  }, []);
-
-  useEffect(() => {
-    setMounted(true);
   }, []);
 
   // Renders a fixed-size invisible placeholder before mount so layout
@@ -52,7 +60,7 @@ export function Header() {
             href="/"
             className="text-sm font-bold tracking-tight hover:opacity-80 transition-opacity"
           >
-            <span className="gradient-text">Alex.dev</span>
+            <span className="gradient-text">{BRAND_NAME}</span>
           </Link>
 
           {/* Desktop Nav */}

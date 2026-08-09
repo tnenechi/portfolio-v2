@@ -11,7 +11,6 @@ export interface ProfileInfo {
   name: string;
   headline: string;
   bio: string;
-  location: string;
   status: AvailabilityStatus;
   socials: SocialLink[];
   resumeUrl: string;

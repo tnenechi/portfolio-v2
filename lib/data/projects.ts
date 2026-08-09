@@ -23,8 +23,8 @@ export const projectsData: Project[] = [
       "Admin CRUD dashboard for inventory management",
       "Responsive frontend integrated with REST APIs",
     ],
-    demoUrl: "https://example.com/ezscents",
-    githubUrl: "https://github.com/example/ezscents",
+    demoUrl: "https://secretscent.org/",
+    githubUrl: "https://github.com/tnenechi/EZSCENTS",
     featured: true,
   },
 
@@ -50,9 +50,9 @@ export const projectsData: Project[] = [
       "Persistent favourites and saved recipes",
       "Dynamic recipe rendering with responsive UI",
     ],
-    demoUrl: "https://example.com/lets-cook",
-    githubUrl: "https://github.com/example/lets-cook",
-    featured: true,
+    demoUrl: "https://lets-cook.onrender.com/",
+    githubUrl: "https://github.com/tnenechi/Lets-Cook",
+    featured: false,
   },
 
   {
@@ -77,8 +77,8 @@ export const projectsData: Project[] = [
       "Save draft workflow with CV upload support",
       "Feature-based architecture built for long-term scalability",
     ],
-    demoUrl: "https://example.com/rms",
-    githubUrl: "https://github.com/example/recruitment-management-system",
-    featured: true,
+    demoUrl: "#",
+    githubUrl: "https://github.com/tnenechi/RMS",
+    featured: false,
   },
 ];

@@ -21,7 +21,7 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [x] T004 Create static profile & bio data file with headline, location, availability status, resume path, and social links in `lib/data/profile.ts`
+- [x] T004 Create static profile & bio data file with headline, availability status, resume path, and social links in `lib/data/profile.ts`
 - [x] T005 [P] Implement reusable shadcn UI primitive components (`Card`, `Badge`, `Dialog`, `Tabs`, `Input`, `Textarea`, `Tooltip`) in `components/ui/`
 - [x] T006 [P] Implement sticky navigation Header component with section anchor links, theme toggle button (`data-testid="theme-toggle-btn"`), and responsive mobile drawer in `components/layout/header.tsx`
 - [x] T007 [P] Implement Footer component with social links, copyright notices, and back-to-top trigger in `components/layout/footer.tsx`
@@ -57,10 +57,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T019 [P] [US3] Implement Contact Form API route handler `POST /api/contact` with Zod request schema validation (`ContactInput`) and structured error/success JSON responses in `app/api/contact/route.ts`
-- [ ] T020 [US3] Implement Contact Form client component (`data-testid="contact-submit-btn"`) with inline validation error states, loading spinner, success feedback banner, and API fallback in `components/contact/contact-form.tsx`
-- [ ] T021 [P] [US3] Add static resume PDF asset file in `public/resume.pdf` and link resume download buttons across Hero and Header components
-- [ ] T022 [US3] Integrate Contact section into main portfolio page in `app/page.tsx`
+- [x] T019 [P] [US3] Implement Contact Form API route handler `POST /api/contact` with Zod request schema validation (`ContactInput`) and structured error/success JSON responses in `app/api/contact/route.ts`
+- [x] T020 [US3] Implement Contact Form client component (`data-testid="contact-submit-btn"`) with inline validation error states, loading spinner, success feedback banner, and API fallback in `components/contact/contact-form.tsx`
+- [x] T021 [P] [US3] Add static resume PDF asset file in `public/resume.pdf` and link resume download buttons across Hero and Header components
+- [x] T022 [US3] Integrate Contact section into main portfolio page in `app/page.tsx`
 
 **Checkpoint**: All user stories should now be independently functional.
 
@@ -70,9 +70,9 @@
 
 **Purpose**: Final system-wide accessibility, performance optimization, and empirical validation.
 
-- [ ] T023 [P] Implement WCAG 2.1 AA accessibility enhancements (focus indicators, ARIA landmarks, `aria-live` status regions, keyboard navigation focus traps) across `components/`
-- [ ] T024 [P] Implement responsive layout optimization and edge-case handling (320px ultra-small screens, 4K displays, progressive image placeholders) in `app/globals.css` and Next.js components
-- [ ] T025 Run full validation suite (`npm run lint`, TypeScript compiler check `tsc`, `npm run build`, and `quickstart.md` test scenarios 1-5)
+- [x] T023 [P] Implement WCAG 2.1 AA accessibility enhancements (focus indicators, ARIA landmarks, `aria-live` status regions, keyboard navigation focus traps) across `components/`
+- [x] T024 [P] Implement responsive layout optimization and edge-case handling (320px ultra-small screens, 4K displays, progressive image placeholders) in `app/globals.css` and Next.js components
+- [x] T025 Run full validation suite (`npm run lint`, TypeScript compiler check `tsc`, `npm run build`, and `quickstart.md` test scenarios 1-5)
 
 ---
 

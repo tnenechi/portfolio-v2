@@ -1,8 +1,10 @@
 'use client';
 
 import { useRef } from 'react';
-import { MapPin, Zap, ArrowDown } from 'lucide-react';
-import { Code2, Globe, X, Mail, GraduationCap } from 'lucide-react';
+import { Zap, ArrowDown } from 'lucide-react';
+import { VscGithub } from 'react-icons/vsc';
+import { BsLinkedin } from 'react-icons/bs';
+import { IoMailOutline } from 'react-icons/io5';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { buttonVariants } from '@/components/ui/button';
@@ -13,11 +15,9 @@ import { cn } from '@/lib/utils';
 gsap.registerPlugin(useGSAP);
 
 const SOCIAL_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  Code2,
-  Globe,
-  X,
-  Mail,
-  GraduationCap,
+  VscGithub,
+  BsLinkedin,
+  IoMailOutline,
 };
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
@@ -41,7 +41,6 @@ export function HeroSection() {
           [
             '.hero-status',
             '.hero-title',
-            '.hero-location',
             '.hero-bio',
             '.hero-cta',
             '.hero-socials',
@@ -64,12 +63,6 @@ export function HeroSection() {
           { opacity: 0, y: 40 },
           { opacity: 1, y: 0, duration: 0.8 },
           '-=0.2'
-        )
-        .fromTo(
-          '.hero-location',
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.5 },
-          '-=0.3'
         )
         .fromTo(
           '.hero-bio',
@@ -124,12 +117,6 @@ export function HeroSection() {
           <span className="block text-foreground">{profileData.name}</span>
           <span className="block gradient-text mt-2">{profileData.headline}</span>
         </h1>
-
-        {/* Location */}
-        <p className="hero-location flex items-center justify-center gap-1.5 text-sm text-muted-foreground mb-6">
-          <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-          {profileData.location}
-        </p>
 
         {/* Bio */}
         <p className="hero-bio mx-auto max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed mb-10">
