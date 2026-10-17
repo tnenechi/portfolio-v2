@@ -16,11 +16,11 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="border-t border-border bg-card">
+      <div className="mx-auto max-w-7xl px-space-sm sm:px-space-md lg:px-space-lg py-space-xl">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-space-md">
           {/* Brand */}
-          <div className="flex flex-col items-center md:items-start gap-1">
+          <div className="flex flex-col items-center md:items-start gap-space-3xs">
             <span className="text-sm font-bold gradient-text">{BRAND_NAME}</span>
             <p className="text-xs text-muted-foreground">
               {profileData.headline}
@@ -28,7 +28,7 @@ export function Footer() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-space-xs">
             {profileData.socials.map((social) => {
               const Icon = ICON_MAP[social.icon];
               return (
@@ -47,7 +47,7 @@ export function Footer() {
           </div>
 
           {/* Copyright + Back to top */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-space-sm">
             <p className="text-xs text-muted-foreground">
               © {currentYear} {profileData.name}. All rights reserved.
             </p>

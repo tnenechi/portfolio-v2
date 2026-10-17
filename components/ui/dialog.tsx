@@ -168,7 +168,7 @@ const DialogContent = React.forwardRef<
         aria-modal="true"
         className={cn(
           'fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2',
-          'rounded-xl border border-border bg-card p-6 shadow-2xl',
+          'rounded-xl border border-border bg-card p-space-md shadow-2xl',
           'animate-in fade-in-0 zoom-in-95 slide-in-from-left-1/2 slide-in-from-top-[48%]',
           'max-h-[90vh] overflow-y-auto',
           'focus:outline-none',
@@ -194,7 +194,7 @@ DialogContent.displayName = 'DialogContent';
 // --------------- DialogHeader ---------------
 function DialogHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} />
+    <div className={cn('flex flex-col space-y-space-2xs text-center sm:text-left', className)} {...props} />
   );
 }
 
@@ -206,7 +206,7 @@ const DialogTitle = React.forwardRef<
   <h2
     ref={ref}
     id="modal-title"
-    className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+    className={cn('type-modal-title', className)}
     {...props}
   />
 ));

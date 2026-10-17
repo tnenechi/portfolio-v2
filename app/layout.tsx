@@ -1,23 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
 import { profileData } from "@/lib/data/profile";
 import { SITE_URL } from "@/lib/config";
 
-const fontSans = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const fontBody = localFont({
+  src: [{ path: "../public/Supreme-Regular.woff2", weight: "400", style: "normal" }],
+  variable: "--font-supreme",
+  display: "swap",
 });
 
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
+const fontHeading = localFont({
+  src: [
+    { path: "../public/Recia-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../public/Recia-Semibold.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-recia",
+  display: "swap",
 });
 
-const TITLE = `${profileData.name} | Building Modern Web Experiences`;
-const DESCRIPTION = `Portfolio of ${profileData.name}, a ${profileData.headline} specializing in React, Next.js, TypeScript, Node.js, and PostgreSQL. Explore modern web applications, technical case studies, and software engineering projects.`;
+const TITLE = `${profileData.name} – Software Engineer`;
+const DESCRIPTION = `Portfolio of ${profileData.name}, a ${profileData.headline}. ${profileData.bio}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -74,10 +78,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "oklch(0.99 0.002 240)" },
-    { media: "(prefers-color-scheme: dark)", color: "oklch(0.11 0.015 255)" },
-  ],
+  themeColor: "oklch(1 0 0)",
 };
 
 export default function RootLayout({
@@ -88,30 +89,22 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       className={cn(
         "h-full",
         "antialiased",
-        fontSans.variable,
-        fontMono.variable,
-        "font-sans",
+        fontBody.variable,
+        fontHeading.variable,
+        "type-body",
       )}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-space-sm focus:py-space-2xs focus:text-sm focus:font-medium focus:text-primary-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Skip to main content
         </a>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

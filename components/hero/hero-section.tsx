@@ -1,34 +1,70 @@
 'use client';
 
-import { useRef } from 'react';
-import { Zap, ArrowDown } from 'lucide-react';
-import { VscGithub } from 'react-icons/vsc';
-import { BsLinkedin } from 'react-icons/bs';
-import { IoMailOutline } from 'react-icons/io5';
+import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
+import { Download, ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { profileData } from '@/lib/data/profile';
+import { profileData, technologiesData } from '@/lib/data/profile';
 import { cn } from '@/lib/utils';
 
 gsap.registerPlugin(useGSAP);
 
-const SOCIAL_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  VscGithub,
-  BsLinkedin,
-  IoMailOutline,
-};
+const TYPEWRITER_WORDS = [
+  'Software Engineer',
+  'Full-Stack Developer',
+];
 
-const STATUS_LABELS: Record<string, { label: string; color: string }> = {
-  available: { label: 'Available for work', color: 'text-emerald-400' },
-  busy: { label: 'Currently busy', color: 'text-amber-400' },
-  open_to_offers: { label: 'Open to offers', color: 'text-sky-400' },
-};
+function TypewriterRole() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = TYPEWRITER_WORDS[wordIndex];
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting && text === currentWord) {
+      // Completed typing, pause before deleting (slower pause: 3.2s)
+      timer = setTimeout(() => setIsDeleting(true), 3200);
+    } else if (isDeleting && text === '') {
+      // Completed deleting, pause before moving to next word
+      timer = setTimeout(() => {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % TYPEWRITER_WORDS.length);
+      }, 500);
+    } else {
+      // Slower typing speed (120ms) and slower deletion (55ms)
+      const speed = isDeleting ? 55 : 120;
+      timer = setTimeout(() => {
+        setText(
+          isDeleting
+            ? currentWord.substring(0, text.length - 1)
+            : currentWord.substring(0, text.length + 1)
+        );
+      }, speed);
+    }
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, wordIndex]);
+
+  return (
+    <div className="hero-role flex items-center gap-1.5 text-sm sm:text-base font-medium tracking-wide text-muted-foreground uppercase mb-space-md min-h-[1.75rem]">
+      <span className="sr-only">Software Engineer</span>
+      <span aria-hidden="true" className="text-foreground font-semibold tracking-wider">
+        {text}
+      </span>
+      <span
+        aria-hidden="true"
+        className="inline-block w-[2px] h-4 bg-foreground animate-pulse ml-0.5"
+      />
+    </div>
+  );
+}
 
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
-  const statusInfo = STATUS_LABELS[profileData.status];
 
   useGSAP(
     () => {
@@ -38,15 +74,8 @@ export function HeroSection() {
 
       if (reducedMotion) {
         gsap.set(
-          [
-            '.hero-status',
-            '.hero-title',
-            '.hero-bio',
-            '.hero-cta',
-            '.hero-socials',
-            '.hero-scroll',
-          ],
-          { opacity: 1, x: 0, y: 0, clearProps: 'transform' }
+          ['.hero-panel', '.hero-photo', '.hero-role', '.hero-title', '.hero-lead', '.hero-actions', '.hero-strip'],
+          { opacity: 1, y: 0 }
         );
         return;
       }
@@ -54,127 +83,141 @@ export function HeroSection() {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       tl.fromTo(
-        '.hero-status',
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.5 }
+        '.hero-panel',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8 }
       )
         .fromTo(
-          '.hero-title',
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          '-=0.2'
+          '.hero-photo',
+          { opacity: 0, scale: 0.96 },
+          { opacity: 1, scale: 1, duration: 0.7 },
+          '-=0.5'
         )
         .fromTo(
-          '.hero-bio',
-          { opacity: 0, y: 16 },
+          '.hero-role',
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.5 },
+          '-=0.4'
+        )
+        .fromTo(
+          '.hero-title',
+          { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.6 },
           '-=0.3'
         )
         .fromTo(
-          '.hero-cta',
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, clearProps: 'transform' },
+          '.hero-lead',
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5 },
+          '-=0.3'
+        )
+        .fromTo(
+          '.hero-actions',
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5 },
           '-=0.2'
         )
         .fromTo(
-          '.hero-socials',
-          { opacity: 0, x: -10 },
-          { opacity: 1, x: 0, duration: 0.5, stagger: 0.08, clearProps: 'transform' },
+          '.hero-strip',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6 },
           '-=0.2'
-        )
-        .fromTo('.hero-scroll', { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.1');
+        );
     },
     { scope: containerRef }
   );
 
+  // Duplicate items for continuous smooth marquee loop
+  const marqueeItems = [...technologiesData, ...technologiesData, ...technologiesData];
+
   return (
     <section
       ref={containerRef}
-      id="hero"
-      aria-label="Hero — Developer introduction"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+      id="home"
+      aria-label="Hero — Introduction"
+      className="pt-space-xl sm:pt-space-2xl pb-0"
     >
-      {/* Background gradient blobs */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-      >
-        <div className="absolute -top-40 -right-32 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl opacity-60" />
-        <div className="absolute -bottom-40 -left-32 h-[500px] w-[500px] rounded-full bg-primary/8 blur-3xl opacity-40" />
+      <div className="mx-auto max-w-6xl px-space-md mb-space-xl sm:mb-space-2xl">
+        {/* Hero Card Panel */}
+        <div className="hero-panel grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] gap-space-xl md:gap-space-2xl items-center bg-muted border border-border rounded-4xl p-space-md sm:p-space-xl">
+          {/* Hero Portrait Photo — Centered in its column, shifted slightly to center subject */}
+          <div className="hero-photo flex items-center justify-center w-full h-full">
+            <div className="relative aspect-[3/4] w-full max-w-[19rem] sm:max-w-[21rem] rounded-2xl overflow-hidden border border-border bg-secondary shadow-sm">
+              <Image
+                src="/Home.jpg"
+                alt={profileData.name}
+                fill
+                priority
+                sizes="(min-width: 768px) 340px, 85vw"
+                className="object-cover"
+                style={{ objectPosition: '72% center' }}
+              />
+            </div>
+          </div>
+
+          {/* Hero Content */}
+          <div className="hero-text flex flex-col justify-center">
+            {/* Typewriter role */}
+            <TypewriterRole />
+
+            {/* Headline */}
+            <h1 className="hero-title font-heading font-semibold text-3xl sm:text-5xl md:text-[3.25rem] leading-[1.08] tracking-tight text-foreground mb-space-md">
+              Hi, I’m {profileData.name}.
+            </h1>
+
+            {/* Lead text */}
+            <p className="hero-lead text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-space-lg">
+              {profileData.bio}
+            </p>
+
+            {/* Action buttons */}
+            <div className="hero-actions flex flex-wrap items-center gap-space-xs">
+              <a
+                href="#projects"
+                className={cn(buttonVariants({ variant: 'default', size: 'lg' }), 'h-11 px-6 text-base font-medium')}
+                data-testid="hero-view-work-btn"
+              >
+                View My Projects
+                <ArrowUpRight className="h-4 w-4 ml-space-2xs" />
+              </a>
+
+              <a
+                href={profileData.resumeUrl}
+                download
+                aria-label="Download CV"
+                className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'h-11 px-6 text-base font-medium')}
+              >
+                Download CV
+                <Download className="h-4 w-4 ml-space-2xs" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-24 text-center">
-        {/* Availability Badge */}
-        <div className="hero-status flex items-center justify-center gap-2 mb-6">
-          <Badge variant="glass" className="flex items-center gap-1.5 text-xs px-3 py-1">
-            <span className={`inline-block h-2 w-2 rounded-full bg-current ${statusInfo.color} animate-pulse`} />
-            <span className={statusInfo.color}>{statusInfo.label}</span>
-          </Badge>
-        </div>
-
-        {/* Main Headline */}
-        <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-4">
-          <span className="block text-foreground">{profileData.name}</span>
-          <span className="block gradient-text mt-2">{profileData.headline}</span>
-        </h1>
-
-        {/* Bio */}
-        <p className="hero-bio mx-auto max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed mb-10">
-          {profileData.bio}
+      {/* Technologies strip — Full width edge-to-edge */}
+      <div className="hero-strip w-full border-y border-border bg-secondary/80 py-3.5 px-4 sm:px-8 shadow-2xs overflow-hidden">
+        <p className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2 text-center">
+          Technologies I build with
         </p>
+        <div className="relative overflow-hidden w-full select-none">
+          {/* Gradient edge fades for seamless marquee */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 z-10 bg-gradient-to-r from-secondary/90 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 z-10 bg-gradient-to-l from-secondary/90 to-transparent" />
 
-        {/* CTAs */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
-          <a
-            href="#projects"
-            className={cn(buttonVariants({ size: 'lg' }), 'hero-cta')}
-            data-testid="hero-view-work-btn"
-            aria-label="Navigate to projects gallery"
-          >
-            <Zap className="h-4 w-4 mr-2" aria-hidden="true" />
-            View My Work
-          </a>
-
-          <a
-            href="#contact"
-            className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'hero-cta')}
-          >
-            Get in Touch
-          </a>
-
-          <a
-            href={profileData.resumeUrl}
-            download
-            aria-label="Download resume PDF"
-            className={cn(buttonVariants({ variant: 'ghost', size: 'lg' }), 'hero-cta')}
-          >
-            Download Resume
-          </a>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex items-center justify-center gap-3 mb-16">
-          {profileData.socials.map((social) => {
-            const Icon = SOCIAL_ICON_MAP[social.icon];
-            return (
-              <a
-                key={social.platform}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="hero-socials inline-flex items-center justify-center h-10 w-10 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {Icon && <Icon className="h-4 w-4" />}
-              </a>
-            );
-          })}
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="hero-scroll flex flex-col items-center gap-2 text-muted-foreground/60">
-          <span className="text-xs tracking-widest uppercase">Scroll to explore</span>
-          <ArrowDown className="h-4 w-4 animate-bounce" aria-hidden="true" />
+          {/* Sliding text track */}
+          <div className="animate-marquee flex items-center gap-8 whitespace-nowrap">
+            {marqueeItems.map((tech, index) => (
+              <div key={`${tech}-${index}`} className="flex items-center gap-8">
+                <span className="text-sm sm:text-base font-medium text-foreground tracking-wide">
+                  {tech}
+                </span>
+                <span className="text-muted-foreground/40 text-xs" aria-hidden="true">
+                  •
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

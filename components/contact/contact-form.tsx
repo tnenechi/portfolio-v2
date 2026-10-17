@@ -101,9 +101,9 @@ export function ContactForm() {
   const isSubmitting = status === 'submitting';
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div className="space-y-1.5">
+    <form onSubmit={handleSubmit} noValidate className="space-y-space-md">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+        <div className="space-y-space-2xs">
           <label htmlFor="contact-name" className="text-sm font-medium">
             Name
           </label>
@@ -125,7 +125,7 @@ export function ContactForm() {
           )}
         </div>
 
-        <div className="space-y-1.5">
+        <div className="space-y-space-2xs">
           <label htmlFor="contact-email" className="text-sm font-medium">
             Email
           </label>
@@ -149,7 +149,7 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-space-2xs">
         <label htmlFor="contact-subject" className="text-sm font-medium">
           Subject
         </label>
@@ -170,7 +170,7 @@ export function ContactForm() {
         )}
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-space-2xs">
         <label htmlFor="contact-message" className="text-sm font-medium">
           Message
         </label>
@@ -192,7 +192,7 @@ export function ContactForm() {
         )}
       </div>
 
-      <div className="flex items-center gap-4 pt-2">
+      <div className="flex items-center gap-space-sm pt-space-2xs">
         <Button
           type="submit"
           size="lg"
@@ -201,22 +201,22 @@ export function ContactForm() {
           disabled={isSubmitting}
         >
           {isSubmitting ? (
-            <Loader2 className="h-4 w-4 mr-2 animate-spin" aria-hidden="true" />
+            <Loader2 className="h-4 w-4 mr-space-2xs animate-spin" aria-hidden="true" />
           ) : (
-            <Send className="h-4 w-4 mr-2" aria-hidden="true" />
+            <Send className="h-4 w-4 mr-space-2xs" aria-hidden="true" />
           )}
           {isSubmitting ? 'Sending…' : 'Send Message'}
         </Button>
 
         <div aria-live="polite" className="flex-1">
           {status === 'success' && statusMessage && (
-            <p className="flex items-center gap-1.5 text-sm text-emerald-500">
+            <p className="flex items-center gap-space-2xs text-sm text-emerald-500">
               <CheckCircle2 className="h-4 w-4 shrink-0" aria-hidden="true" />
               {statusMessage}
             </p>
           )}
           {status === 'error' && statusMessage && (
-            <p className={cn('flex items-center gap-1.5 text-sm text-destructive')}>
+            <p className={cn('flex items-center gap-space-2xs text-sm text-destructive')}>
               <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
               {statusMessage}
             </p>

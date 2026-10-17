@@ -108,16 +108,16 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
 
         {project.featured && (
           <Badge
-            variant="glass"
-            className="absolute top-3 right-3 text-[10px] uppercase tracking-wider text-white border-white/20"
+            variant="outline"
+            className="absolute top-3 right-3 text-[10px] uppercase tracking-wider bg-black/70 text-white border-white/20"
           >
             Featured
           </Badge>
         )}
       </div>
 
-      <CardHeader className="space-y-2 pb-2 shrink-0">
-        <CardTitle className="text-lg leading-snug line-clamp-2 min-h-[2.75rem] group-hover:text-primary transition-colors">
+      <CardHeader className="space-y-space-2xs pb-space-2xs shrink-0">
+        <CardTitle className="line-clamp-2 min-h-[2.75rem] group-hover:text-primary transition-colors">
           {project.title}
         </CardTitle>
         <p className="text-sm text-muted-foreground line-clamp-2 min-h-[2.5rem]">
@@ -126,8 +126,8 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
       </CardHeader>
 
       {/* Fixed-height tag row so +N never stretches the card */}
-      <CardContent className="pb-3 flex-1">
-        <div className="flex flex-wrap content-start gap-1.5 min-h-[3.25rem]">
+      <CardContent className="pb-space-xs flex-1">
+        <div className="flex flex-wrap content-start gap-space-2xs min-h-[3.25rem]">
           {visibleTags.map((tag) => (
             <Badge
               key={tag}
@@ -145,15 +145,15 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="gap-3 pt-0 mt-auto shrink-0 text-muted-foreground">
+      <CardFooter className="gap-space-xs pt-0 mt-auto shrink-0 text-muted-foreground">
         {project.demoUrl && (
-          <span className="inline-flex items-center gap-1 text-xs">
+          <span className="inline-flex items-center gap-space-3xs text-xs">
             <ExternalLink className="h-3 w-3" aria-hidden="true" />
             Demo
           </span>
         )}
         {project.githubUrl && (
-          <span className="inline-flex items-center gap-1 text-xs">
+          <span className="inline-flex items-center gap-space-3xs text-xs">
             <Code className="h-3 w-3" aria-hidden="true" />
             Code
           </span>

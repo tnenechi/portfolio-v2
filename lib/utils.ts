@@ -1,5 +1,15 @@
 import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { extendTailwindMerge } from "tailwind-merge"
+
+// Teach tailwind-merge the custom spacing tokens (see app/globals.css) so
+// e.g. cn("p-space-md", "pt-0") resolves conflicts correctly.
+const twMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      spacing: ["space-3xs", "space-2xs", "space-xs", "space-sm", "space-md", "space-lg", "space-xl", "space-2xl", "space-3xl"],
+    },
+  },
+})
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

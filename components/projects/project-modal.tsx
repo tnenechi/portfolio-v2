@@ -54,9 +54,9 @@ export function ProjectModal({
           )}
         </div>
 
-        <div className="p-6 space-y-5">
-          <DialogHeader className="space-y-2 text-left">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+        <div className="p-space-md space-y-space-md">
+          <DialogHeader className="space-y-space-2xs text-left">
+            <div className="flex flex-wrap items-center gap-space-2xs text-xs text-muted-foreground">
               {project.featured && (
                 <Badge
                   variant="accent"
@@ -66,7 +66,7 @@ export function ProjectModal({
                 </Badge>
               )}
             </div>
-            <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+            <DialogTitle>{project.title}</DialogTitle>
             <DialogDescription className="text-base text-muted-foreground">
               {project.tagline}
             </DialogDescription>
@@ -78,14 +78,14 @@ export function ProjectModal({
 
           {/* Highlights */}
           <div>
-            <h3 className="text-sm font-semibold mb-2">
+            <h3 className="text-sm font-semibold mb-space-2xs">
               Architecture highlights
             </h3>
-            <ul className="space-y-1.5">
+            <ul className="space-y-space-2xs">
               {project.highlights.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-2 text-sm text-muted-foreground before:content-[''] before:mt-2 before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-primary"
+                  className="flex gap-space-2xs text-sm text-muted-foreground before:content-[''] before:mt-space-2xs before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-primary"
                 >
                   {item}
                 </li>
@@ -95,8 +95,8 @@ export function ProjectModal({
 
           {/* Tech stack */}
           <div>
-            <h3 className="text-sm font-semibold mb-2">Tech stack</h3>
-            <div className="flex flex-wrap gap-1.5">
+            <h3 className="text-sm font-semibold mb-space-2xs">Tech stack</h3>
+            <div className="flex flex-wrap gap-space-2xs">
               {project.tags.map((tag) => (
                 <Badge key={tag} variant="secondary" className="text-xs">
                   {tag}
@@ -106,7 +106,7 @@ export function ProjectModal({
           </div>
 
           {/* Actions */}
-          <div className="flex flex-wrap gap-2 pt-1">
+          <div className="flex flex-wrap gap-space-2xs pt-space-3xs">
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
@@ -114,7 +114,7 @@ export function ProjectModal({
                 rel="noopener noreferrer"
                 className={cn(buttonVariants({ size: "default" }))}
               >
-                <ExternalLink className="h-4 w-4 mr-1.5" aria-hidden="true" />
+                <ExternalLink className="h-4 w-4 mr-space-2xs" aria-hidden="true" />
                 Live demo
               </a>
             )}
@@ -127,7 +127,7 @@ export function ProjectModal({
                   buttonVariants({ variant: "outline", size: "default" }),
                 )}
               >
-                <Code className="h-4 w-4 mr-1.5" aria-hidden="true" />
+                <Code className="h-4 w-4 mr-space-2xs" aria-hidden="true" />
                 Source code
               </a>
             )}
