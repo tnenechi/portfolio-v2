@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Download, ArrowUpRight } from 'lucide-react';
+import { FileText, ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { buttonVariants } from '@/components/ui/button';
@@ -183,12 +183,13 @@ export function HeroSection() {
 
               <a
                 href={profileData.resumeUrl}
-                download
-                aria-label="Download CV"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View CV (opens in new tab)"
                 className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'h-11 px-6 text-base font-medium')}
               >
-                Download CV
-                <Download className="h-4 w-4 ml-space-2xs" />
+                View CV
+                <FileText className="h-4 w-4 ml-space-2xs" />
               </a>
             </div>
           </div>

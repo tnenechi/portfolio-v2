@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { profileData } from "@/lib/data/profile";
@@ -48,14 +48,15 @@ export function Header() {
 
             <a
               href={profileData.resumeUrl}
-              download
-              aria-label="Download CV"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View CV (opens in new tab)"
               className={cn(
                 buttonVariants({ variant: "default", size: "sm" }),
                 "h-9 px-4 text-sm font-medium",
               )}
             >
-              Download CV
+              View CV
             </a>
           </div>
 
@@ -96,15 +97,16 @@ export function Header() {
           ))}
           <a
             href={profileData.resumeUrl}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
             className={cn(
               buttonVariants({ variant: "default" }),
               "mt-space-2xs w-full justify-center",
             )}
           >
-            <Download className="h-4 w-4 mr-space-2xs" />
-            Download CV
+            <FileText className="h-4 w-4 mr-space-2xs" />
+            View CV
           </a>
         </nav>
       )}
