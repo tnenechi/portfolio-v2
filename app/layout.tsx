@@ -6,7 +6,9 @@ import { profileData } from "@/lib/data/profile";
 import { SITE_URL } from "@/lib/config";
 
 const fontBody = localFont({
-  src: [{ path: "../public/Supreme-Regular.woff2", weight: "400", style: "normal" }],
+  src: [
+    { path: "../public/Supreme-Regular.woff2", weight: "400", style: "normal" },
+  ],
   variable: "--font-supreme",
   display: "swap",
 });
@@ -65,7 +67,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: TITLE,
-    description: `Explore the portfolio of ${profileData.name}, featuring full-stack web applications, interactive user experiences, technical case studies, and software engineering projects.`,
+    description: `Explore the portfolio of ${profileData.name}`,
     type: "website",
     url: SITE_URL,
     siteName: profileData.name,
